@@ -46,7 +46,7 @@ export default function LoginPage() {
 
       if (response.ok) {
         toast.success('Login successful!');
-        
+
         // Small delay to ensure cookie is set
         setTimeout(() => {
           // Redirect based on role
@@ -77,10 +77,19 @@ export default function LoginPage() {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-2">
-            <Smartphone className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">ElectroStore</span>
-          </Link>
+          <div className="flex justify-center items-center h-full">
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+                  <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
+                </div>
+                <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+              </div>
+              <span className="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
+                ElectroStore
+              </span>
+            </Link>
+          </div>
         </div>
 
         <Card>
