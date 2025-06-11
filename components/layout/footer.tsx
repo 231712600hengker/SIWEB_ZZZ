@@ -8,11 +8,14 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <Zap className="h-6 w-6 text-white" />
+            <Link href="/" className="flex items-center space-x-3">
+              <div className="relative">
+                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                  <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
+                </div>
+                <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full"></div>
               </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="text-xl font-bold text-white">
                 ElectroStore
               </span>
             </Link>
@@ -109,8 +112,8 @@ export function Footer() {
               <div className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-blue-400 mt-1 flex-shrink-0" />
                 <div>
-                  <p className="text-gray-400">123 Tech Street</p>
-                  <p className="text-gray-400">Digital City, DC 12345</p>
+                  <p className="text-gray-400">123 Babarsari</p>
+                  <p className="text-gray-400">Sleman, Semua Teman</p>
                 </div>
               </div>
               <div className="flex items-center space-x-3">

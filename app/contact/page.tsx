@@ -15,7 +15,7 @@ export default function ContactPage() {
     {
       icon: MapPin,
       title: "Visit Our Store",
-      details: ["123 Tech Street", "Digital City, DC 12345", "United States"],
+      details: ["123 Babarsari", "Sleman, Semua Teman", "Hindia Belanda"],
       gradient: "from-blue-400 to-blue-600",
       bgGradient: "from-blue-50 to-blue-100"
     },
@@ -223,7 +223,7 @@ export default function ContactPage() {
                     <div className="text-center relative z-10">
                       <MapPin className="h-16 w-16 text-blue-600 mx-auto mb-4 animate-bounce" />
                       <p className="text-blue-900 font-bold text-lg">Visit Our Store</p>
-                      <p className="text-blue-700 font-medium">123 Tech Street, Digital City</p>
+                      <p className="text-blue-700 font-medium">123 Babarsari, Digital City</p>
                     </div>
                   </div>
                 </CardContent>

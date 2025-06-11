@@ -69,9 +69,14 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <Smartphone className="h-8 w-8 text-blue-600" />
-            <span className="text-xl font-bold text-gray-900">ElectroStore</span>
+          <Link href="/" className="flex items-center space-x-3 group">
+            <div className="relative">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
+                <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
+              </div>
+              <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
+            </div>
+            <span className="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">ElectroStore</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -80,9 +85,11 @@ export function Navbar() {
               <Link
                 key={item.href}
                 href={item.href}
-                className="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+                className="relative text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-blue-50"
               >
-                {item.label}
+                <span className="relative z-10">{item.label}</span>
+                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></div>
               </Link>
             ))}
           </div>
@@ -134,6 +141,7 @@ export function Navbar() {
               </div>
             )}
 
+            {/* Mobile Menu */}
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
