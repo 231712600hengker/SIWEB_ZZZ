@@ -23,18 +23,38 @@ export function Footer() {
             
             {/* Social Media */}
             <div className="flex space-x-4">
-              <Link href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all duration-300">
+              <a
+                href="https://www.facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-600 transition-all duration-300"
+              >
                 <Facebook className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-400 transition-all duration-300">
+              </a>
+              <a
+                href="https://www.twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-blue-400 transition-all duration-300"
+              >
                 <Twitter className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-pink-600 transition-all duration-300">
+              </a>
+              <a
+                href="https://www.instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-pink-600 transition-all duration-300"
+              >
                 <Instagram className="h-5 w-5" />
-              </Link>
-              <Link href="#" className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300">
+              </a>
+              <a
+                href="https://www.github.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 bg-gray-800 rounded-full flex items-center justify-center text-gray-400 hover:text-white hover:bg-gray-700 transition-all duration-300"
+              >
                 <Github className="h-5 w-5" />
-              </Link>
+              </a>
             </div>
           </div>
 
@@ -120,10 +140,11 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Bottom Footer */}
         <div className="border-t border-gray-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-gray-400 text-sm">
-              © 2024 ElectroStore. All rights reserved. Built with Next.js and Prisma.
+              © 2025 ElectroStore. All rights reserved. Built with Next.js and Prisma.
             </p>
             <div className="flex space-x-6 text-sm">
               <Link href="#" className="text-gray-400 hover:text-white transition-colors">

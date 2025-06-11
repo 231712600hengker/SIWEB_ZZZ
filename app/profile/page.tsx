@@ -9,8 +9,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
-import { User, Mail, Calendar, LogOut, ShoppingBag, Settings } from 'lucide-react';
 import { toast } from 'sonner';
+import { User, Mail, Calendar, LogOut, ShoppingBag, Settings } from 'lucide-react';
 
 interface User {
   id: string;
@@ -66,10 +66,11 @@ export default function ProfilePage() {
     return (
       <div className="min-h-screen bg-white">
         <Navbar />
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="animate-pulse">
-            <div className="bg-gray-200 h-8 w-48 rounded mb-8"></div>
-            <div className="bg-gray-200 h-64 rounded-lg"></div>
+        <div className="max-w-4xl mx-auto px-4 py-8 animate-pulse space-y-6">
+          <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="h-64 bg-gray-200 rounded-lg"></div>
+            <div className="h-64 bg-gray-200 rounded-lg"></div>
           </div>
         </div>
         <Footer />
@@ -77,67 +78,73 @@ export default function ProfilePage() {
     );
   }
 
-  if (!user) {
-    return null;
-  }
+  if (!user) return null;
 
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {/* Header */}
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900">My Profile</h1>
-          <p className="text-gray-600 mt-2">Manage your account information and preferences</p>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Profile</h1>
+          <p className="text-gray-600">Manage your account information and preferences</p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Profile Card */}
-          <div className="lg:col-span-1">
-            <Card>
-              <CardContent className="p-6 text-center">
-                <Avatar className="w-24 h-24 mx-auto mb-4">
-                  <AvatarFallback className="text-2xl">
-                    {user.name.substring(0, 2).toUpperCase()}
-                  </AvatarFallback>
-                </Avatar>
-                
-                <h2 className="text-xl font-semibold mb-2">{user.name}</h2>
-                <p className="text-gray-600 mb-4">{user.email}</p>
-                
-                <Badge variant={user.role === 'ADMIN' ? 'default' : 'secondary'}>
-                  {user.role}
-                </Badge>
-                
-                <Separator className="my-6" />
-                
-                <div className="space-y-3">
-                  <Button variant="outline" className="w-full">
-                    <Settings className="mr-2 h-4 w-4" />
-                    Edit Profile
-                  </Button>
-                  
+          <Card>
+            <CardContent className="p-6 text-center">
+              <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                <User className="text-white w-10 h-10" />
+              </div>
+
+              <h2 className="text-xl font-semibold mb-1">{user.name}</h2>
+              <p className="text-gray-600 mb-3">{user.email}</p>
+              <Badge variant={user.role === 'ADMIN' ? 'default' : 'secondary'}>
+                {user.role}
+              </Badge>
+
+              <Separator className="my-5" />
+
+              <div className="space-y-3">
+                {user.role === 'ADMIN' && (
                   <Button 
                     variant="outline" 
-                    className="w-full text-red-600 hover:text-red-700 hover:bg-red-50"
-                    onClick={handleLogout}
+                    className="w-full justify-start"
+                    onClick={() => router.push('/admin')}
                   >
-                    <LogOut className="mr-2 h-4 w-4" />
-                    Logout
+                    <Settings className="mr-2 h-4 w-4" />
+                    Admin Dashboard
                   </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+                )}
 
-          {/* Account Information */}
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => router.push('/shop')}
+                >
+                  <ShoppingBag className="mr-2 h-4 w-4" />
+                  Browse Products
+                </Button>
+
+                <Button 
+                  variant="destructive" 
+                  className="w-full justify-start"
+                  onClick={handleLogout}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Logout
+                </Button>
+              </div>
+            </CardContent>
+          </Card>
+
+          {/* User Info */}
           <div className="lg:col-span-2 space-y-6">
-            {/* Account Details */}
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <User className="mr-2 h-5 w-5" />
+                  <User className="h-5 w-5 mr-2" />
                   Account Information
                 </CardTitle>
               </CardHeader>
@@ -152,7 +159,7 @@ export default function ProfilePage() {
                     <p className="text-gray-900 font-medium">{user.email}</p>
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-gray-500">Account Type</label>
+                    <label className="text-sm font-medium text-gray-500">Role</label>
                     <p className="text-gray-900 font-medium">{user.role}</p>
                   </div>
                   <div>
@@ -164,48 +171,6 @@ export default function ProfilePage() {
                         day: 'numeric'
                       })}
                     </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Quick Actions */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Quick Actions</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Button variant="outline" className="h-20 flex-col">
-                    <ShoppingBag className="h-6 w-6 mb-2" />
-                    <span>View Orders</span>
-                  </Button>
-                  <Button variant="outline" className="h-20 flex-col">
-                    <Settings className="h-6 w-6 mb-2" />
-                    <span>Account Settings</span>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Account Statistics */}
-            <Card>
-              <CardHeader>
-                <CardTitle>Account Statistics</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-blue-600">0</div>
-                    <div className="text-sm text-gray-500">Total Orders</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-green-600">$0.00</div>
-                    <div className="text-sm text-gray-500">Total Spent</div>
-                  </div>
-                  <div className="text-center">
-                    <div className="text-2xl font-bold text-purple-600">0</div>
-                    <div className="text-sm text-gray-500">Wishlist Items</div>
                   </div>
                 </div>
               </CardContent>
