@@ -1,10 +1,10 @@
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
-import { Button } from '@/components/ui/button';
+import { ProductActions } from '@/components/product/product-actions';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent } from '@/components/ui/card';
 import { Separator } from '@/components/ui/separator';
-import { Star, ShoppingCart, Heart, Share2, Truck, Shield, RotateCcw } from 'lucide-react';
+import { Star, Truck, Shield, RotateCcw } from 'lucide-react';
 import { prisma } from '@/lib/prisma';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
@@ -135,25 +135,8 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
                 </p>
               </div>
 
-              {/* Actions */}
-              <div className="space-y-4">
-                <div className="flex space-x-4">
-                  <Button size="lg" className="flex-1" disabled={product.stock === 0}>
-                    <ShoppingCart className="mr-2 h-5 w-5" />
-                    Add to Cart
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    <Heart className="h-5 w-5" />
-                  </Button>
-                  <Button size="lg" variant="outline">
-                    <Share2 className="h-5 w-5" />
-                  </Button>
-                </div>
-                
-                <Button variant="outline" size="lg" className="w-full">
-                  Buy Now
-                </Button>
-              </div>
+              {/* Product Actions */}
+              <ProductActions product={product} />
             </div>
           </div>
         </div>
@@ -244,11 +227,12 @@ export default async function ProductDetailPage({ params }: { params: { id: stri
                         <span className="text-xs text-gray-500 ml-1">4.5</span>
                       </div>
                     </div>
-                    <Button size="sm" className="w-full mt-3" asChild>
-                      <Link href={`/product/${relatedProduct.id}`}>
-                        View Details
-                      </Link>
-                    </Button>
+                    <Link 
+                      href={`/product/${relatedProduct.id}`}
+                      className="block w-full mt-3 text-center bg-blue-600 text-white py-2 rounded-md text-sm hover:bg-blue-700 transition-colors"
+                    >
+                      View Details
+                    </Link>
                   </CardContent>
                 </Card>
               ))}

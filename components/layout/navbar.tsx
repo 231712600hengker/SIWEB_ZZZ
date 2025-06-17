@@ -5,9 +5,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Smartphone, User, LogOut, ShoppingBag, Home, Info, Phone } from 'lucide-react';
+import { Menu, User, LogOut, ShoppingBag, Home, Info, Phone, ShoppingCart } from 'lucide-react';
+import { getCartItemCount } from '@/lib/cart';
 import { toast } from 'sonner';
 
 interface User {
@@ -20,11 +22,25 @@ interface User {
 export function Navbar() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
+  const [cartItemCount, setCartItemCount] = useState(0);
   const router = useRouter();
 
   useEffect(() => {
     fetchUser();
+    updateCartCount();
+
+    // Listen for cart updates
+    const handleCartUpdate = () => updateCartCount();
+    window.addEventListener('cartUpdated', handleCartUpdate);
+
+    return () => {
+      window.removeEventListener('cartUpdated', handleCartUpdate);
+    };
   }, []);
+
+  const updateCartCount = () => {
+    setCartItemCount(getCartItemCount());
+  };
 
   const fetchUser = async () => {
     try {
@@ -96,6 +112,23 @@ export function Navbar() {
 
           {/* User Menu */}
           <div className="flex items-center space-x-4">
+            {/* Cart Icon */}
+            {user && (
+              <Link href="/profile" className="relative">
+                <Button variant="ghost" size="sm" className="relative">
+                  <ShoppingCart className="h-5 w-5" />
+                  {cartItemCount > 0 && (
+                    <Badge 
+                      variant="destructive" 
+                      className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px]"
+                    >
+                      {cartItemCount}
+                    </Badge>
+                  )}
+                </Button>
+              </Link>
+            )}
+
             {loading ? (
               <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
             ) : user ? (
@@ -141,7 +174,6 @@ export function Navbar() {
               </div>
             )}
 
-            {/* Mobile Menu */}
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
