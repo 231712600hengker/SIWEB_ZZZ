@@ -3,12 +3,13 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@/components/ui/dropdown-menu';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, User, LogOut, ShoppingBag, Home, Info, Phone, ShoppingCart } from 'lucide-react';
+import { Menu, User, LogOut, ShoppingBag, Home, Info, Phone, ShoppingCart, Zap } from 'lucide-react';
 import { getCartItemCount } from '@/lib/cart';
 import { toast } from 'sonner';
 
@@ -81,32 +82,62 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="border-b bg-white/95 backdrop-blur-sm sticky top-0 z-50">
+    <motion.nav 
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50 glass-morphism"
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-3 group">
-            <div className="relative">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center group-hover:shadow-lg transition-all duration-300">
-                <div className="w-4 h-4 bg-white rounded-sm opacity-90"></div>
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            <Link href="/" className="flex items-center space-x-3 group">
+              <div className="relative">
+                <motion.div 
+                  className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center neon-glow"
+                  whileHover={{ rotate: 360 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Zap className="w-4 h-4 text-white" />
+                </motion.div>
+                <motion.div 
+                  className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
               </div>
-              <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full group-hover:scale-125 transition-transform duration-300"></div>
-            </div>
-            <span className="text-xl font-semibold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">ElectroStore</span>
-          </Link>
+              <span className="text-xl font-bold futuristic-heading">
+                ElectroStore
+              </span>
+            </Link>
+          </motion.div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
+            {navItems.map((item, index) => (
+              <motion.div
                 key={item.href}
-                href={item.href}
-                className="relative text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-blue-50"
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
               >
-                <span className="relative z-10">{item.label}</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-                <div className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 group-hover:w-full transition-all duration-300"></div>
-              </Link>
+                <Link
+                  href={item.href}
+                  className="relative text-foreground/80 hover:text-cyan-400 font-medium transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-cyan-400/10"
+                >
+                  <span className="relative z-10">{item.label}</span>
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100"
+                    layoutId="navbar-hover"
+                  />
+                  <motion.div 
+                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 group-hover:w-full transition-all duration-300"
+                  />
+                </Link>
+              </motion.div>
             ))}
           </div>
 
@@ -114,50 +145,61 @@ export function Navbar() {
           <div className="flex items-center space-x-4">
             {/* Cart Icon */}
             {user && (
-              <Link href="/profile" className="relative">
-                <Button variant="ghost" size="sm" className="relative">
-                  <ShoppingCart className="h-5 w-5" />
-                  {cartItemCount > 0 && (
-                    <Badge 
-                      variant="destructive" 
-                      className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px]"
-                    >
-                      {cartItemCount}
-                    </Badge>
-                  )}
-                </Button>
-              </Link>
+              <motion.div
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Link href="/profile" className="relative">
+                  <Button variant="ghost" size="sm" className="relative hover:bg-cyan-400/10 hover:text-cyan-400">
+                    <ShoppingCart className="h-5 w-5" />
+                    {cartItemCount > 0 && (
+                      <motion.div
+                        initial={{ scale: 0 }}
+                        animate={{ scale: 1 }}
+                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px] bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full neon-glow"
+                      >
+                        {cartItemCount}
+                      </motion.div>
+                    )}
+                  </Button>
+                </Link>
+              </motion.div>
             )}
 
             {loading ? (
-              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
+              <div className="w-8 h-8 bg-muted rounded-full animate-pulse" />
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                  <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full">
-                    <Avatar className="h-8 w-8">
-                      <AvatarFallback className="text-xs">
-                        {user.name.substring(0, 2).toUpperCase()}
-                      </AvatarFallback>
-                    </Avatar>
-                  </Button>
+                  <motion.div
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                  >
+                    <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-cyan-400/10">
+                      <Avatar className="h-8 w-8 neon-border">
+                        <AvatarFallback className="text-xs bg-gradient-to-br from-cyan-400 to-purple-600 text-white">
+                          {user.name.substring(0, 2).toUpperCase()}
+                        </AvatarFallback>
+                      </Avatar>
+                    </Button>
+                  </motion.div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56">
+                <DropdownMenuContent align="end" className="w-56 glass-morphism border-cyan-500/20">
                   <div className="flex items-center justify-start gap-2 p-2">
                     <div className="flex flex-col space-y-1 leading-none">
-                      <p className="font-medium">{user.name}</p>
+                      <p className="font-medium text-cyan-400">{user.name}</p>
                       <p className="w-[200px] truncate text-sm text-muted-foreground">
                         {user.email}
                       </p>
                     </div>
                   </div>
                   <DropdownMenuItem asChild>
-                    <Link href={user.role === 'ADMIN' ? '/admin' : '/profile'}>
+                    <Link href={user.role === 'ADMIN' ? '/admin' : '/profile'} className="hover:bg-cyan-400/10">
                       <User className="mr-2 h-4 w-4" />
                       {user.role === 'ADMIN' ? 'Admin Dashboard' : 'Profile'}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout}>
+                  <DropdownMenuItem onClick={handleLogout} className="hover:bg-red-400/10 text-red-400">
                     <LogOut className="mr-2 h-4 w-4" />
                     Log out
                   </DropdownMenuItem>
@@ -165,44 +207,65 @@ export function Navbar() {
               </DropdownMenu>
             ) : (
               <div className="hidden md:flex items-center space-x-2">
-                <Button variant="ghost" asChild>
-                  <Link href="/auth/login">Login</Link>
-                </Button>
-                <Button asChild>
-                  <Link href="/auth/register">Sign Up</Link>
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button variant="ghost" asChild className="hover:bg-cyan-400/10 hover:text-cyan-400">
+                    <Link href="/auth/login">Login</Link>
+                  </Button>
+                </motion.div>
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <Button asChild className="cyber-button">
+                    <Link href="/auth/register">Sign Up</Link>
+                  </Button>
+                </motion.div>
               </div>
             )}
 
             {/* Mobile Menu */}
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="sm" className="md:hidden">
-                  <Menu className="h-5 w-5" />
-                </Button>
+                <motion.div
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  <Button variant="ghost" size="sm" className="md:hidden hover:bg-cyan-400/10">
+                    <Menu className="h-5 w-5" />
+                  </Button>
+                </motion.div>
               </SheetTrigger>
-              <SheetContent>
+              <SheetContent className="glass-morphism border-cyan-500/20">
                 <div className="flex flex-col space-y-4 mt-8">
-                  {navItems.map((item) => {
+                  {navItems.map((item, index) => {
                     const Icon = item.icon;
                     return (
-                      <Link
+                      <motion.div
                         key={item.href}
-                        href={item.href}
-                        className="flex items-center space-x-2 text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200"
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
                       >
-                        <Icon className="h-5 w-5" />
-                        <span>{item.label}</span>
-                      </Link>
+                        <Link
+                          href={item.href}
+                          className="flex items-center space-x-2 text-foreground/80 hover:text-cyan-400 font-medium transition-colors duration-200 p-2 rounded-lg hover:bg-cyan-400/10"
+                        >
+                          <Icon className="h-5 w-5" />
+                          <span>{item.label}</span>
+                        </Link>
+                      </motion.div>
                     );
                   })}
                   
                   {!user && (
-                    <div className="flex flex-col space-y-2 pt-4 border-t">
-                      <Button variant="ghost" asChild>
+                    <div className="flex flex-col space-y-2 pt-4 border-t border-cyan-500/20">
+                      <Button variant="ghost" asChild className="justify-start hover:bg-cyan-400/10">
                         <Link href="/auth/login">Login</Link>
                       </Button>
-                      <Button asChild>
+                      <Button asChild className="cyber-button">
                         <Link href="/auth/register">Sign Up</Link>
                       </Button>
                     </div>
@@ -213,6 +276,6 @@ export function Navbar() {
           </div>
         </div>
       </div>
-    </nav>
+    </motion.nav>
   );
 }
