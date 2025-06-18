@@ -166,10 +166,10 @@ export default function ProfilePage() {
       <div className="min-h-screen bg-white">
         <Navbar />
         <div className="max-w-4xl mx-auto px-4 py-8 animate-pulse space-y-6">
-          <div className="h-8 bg-gray-200 rounded w-1/3"></div>
+          <div className="h-8 bg-white-200 rounded w-1/3"></div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="h-64 bg-gray-200 rounded-lg"></div>
-            <div className="h-64 bg-gray-200 rounded-lg"></div>
+            <div className="h-64 bg-white-200 rounded-lg"></div>
+            <div className="h-64 bg-white-200 rounded-lg"></div>
           </div>
         </div>
         <Footer />
@@ -180,13 +180,13 @@ export default function ProfilePage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white-50">
       <Navbar />
 
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">My Profile</h1>
-          <p className="text-gray-600">Manage your account information and preferences</p>
+          <h1 className="text-3xl font-bold text-white-900 mb-2">My Profile</h1>
+          <p className="text-white-600">Manage your account information and preferences</p>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -198,7 +198,7 @@ export default function ProfilePage() {
               </div>
 
               <h2 className="text-xl font-semibold mb-1">{user.name}</h2>
-              <p className="text-gray-600 mb-3">{user.email}</p>
+              <p className="text-white-600 mb-3">{user.email}</p>
               <Badge variant={user.role === 'ADMIN' ? 'default' : 'secondary'}>
                 {user.role}
               </Badge>
@@ -263,20 +263,20 @@ export default function ProfilePage() {
                   <CardContent className="space-y-4">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="text-sm font-medium text-gray-500">Full Name</label>
-                        <p className="text-gray-900 font-medium">{user.name}</p>
+                        <label className="text-sm font-medium text-white">Full Name</label>
+                        <p className="text-white font-medium">{user.name}</p>
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-gray-500">Email Address</label>
-                        <p className="text-gray-900 font-medium">{user.email}</p>
+                        <label className="text-sm font-medium text-white-500">Email Address</label>
+                        <p className="text-white-900 font-medium">{user.email}</p>
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-gray-500">Role</label>
-                        <p className="text-gray-900 font-medium">{user.role}</p>
+                        <label className="text-sm font-medium text-white-500">Role</label>
+                        <p className="text-white-900 font-medium">{user.role}</p>
                       </div>
                       <div>
-                        <label className="text-sm font-medium text-gray-500">Member Since</label>
-                        <p className="text-gray-900 font-medium">
+                        <label className="text-sm font-medium text-white-500">Member Since</label>
+                        <p className="text-white-900 font-medium">
                           {new Date(user.createdAt).toLocaleDateString('en-US', {
                             year: 'numeric',
                             month: 'long',
@@ -308,8 +308,8 @@ export default function ProfilePage() {
                   <CardContent>
                     {cart.length === 0 ? (
                       <div className="text-center py-8">
-                        <ShoppingCart className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-                        <p className="text-gray-500 mb-4">Your cart is empty</p>
+                        <ShoppingCart className="h-16 w-16 mx-auto text-white-400 mb-4" />
+                        <p className="text-white-500 mb-4">Your cart is empty</p>
                         <Button onClick={() => router.push('/shop')}>
                           Start Shopping
                         </Button>
@@ -325,7 +325,7 @@ export default function ProfilePage() {
                             />
                             <div className="flex-1">
                               <h3 className="font-semibold">{item.name}</h3>
-                              <p className="text-gray-600">${item.price.toFixed(2)} each</p>
+                              <p className="text-white-600">${item.price.toFixed(2)} each</p>
                             </div>
                             <div className="flex items-center space-x-2">
                               <Button
@@ -385,8 +385,8 @@ export default function ProfilePage() {
                   <CardContent>
                     {wishlist.length === 0 ? (
                       <div className="text-center py-8">
-                        <Heart className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-                        <p className="text-gray-500 mb-4">Your wishlist is empty</p>
+                        <Heart className="h-16 w-16 mx-auto text-white-400 mb-4" />
+                        <p className="text-white-500 mb-4">Your wishlist is empty</p>
                         <Button onClick={() => router.push('/shop')}>
                           Discover Products
                         </Button>

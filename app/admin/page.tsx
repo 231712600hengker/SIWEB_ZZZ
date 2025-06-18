@@ -129,7 +129,7 @@ export default function AdminDashboard() {
               ) : analytics?.recentTransactions.length ? (
                 <div className="space-y-4">
                   {analytics.recentTransactions.map((transaction) => (
-                    <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                    <div key={transaction.id} className="flex items-center justify-between p-3 bg-gray rounded-lg">
                       <div>
                         <p className="font-medium">{transaction.user.name}</p>
                         <p className="text-sm text-gray-600">{transaction.product.name}</p>
