@@ -81,21 +81,31 @@ export default function ShopPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Navbar />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-600 to-blue-800 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h1 className="text-4xl md:text-5xl font-bold mb-6">
-              Shop Electronics
-            </h1>
-            <p className="text-xl text-blue-100 max-w-3xl mx-auto">
-              Discover our complete collection of premium electronics and gadgets
-            </p>
-          </div>
-        </div>
-      </section>
+  <Navbar />
+
+  {/* Hero Section */}
+  <section className="relative bg-gradient-to-r from-blue-600 via-purple-600 to-blue-800 text-white py-20 overflow-hidden">
+    {/* Animated Background Elements */}
+    <div className="absolute inset-0">
+      <div className="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full animate-bounce delay-100"></div>
+      <div className="absolute top-20 right-20 w-16 h-16 bg-white/10 rounded-full animate-bounce delay-300"></div>
+      <div className="absolute bottom-20 left-20 w-12 h-12 bg-white/10 rounded-full animate-bounce delay-500"></div>
+      <div className="absolute bottom-10 right-10 w-24 h-24 bg-white/10 rounded-full animate-bounce delay-700"></div>
+    </div>
+
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="text-center">
+        <h1 className="text-4xl md:text-6xl font-bold mb-6 animate-fade-in-up">
+          <span className="bg-gradient-to-r from-white to-blue-200 bg-clip-text text-transparent">
+            Shop Electronics
+          </span>
+        </h1>
+        <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto animate-fade-in-up delay-200">
+          Discover our complete collection of premium electronics and gadgets
+        </p>
+      </div>
+    </div>
+  </section>
 
       {/* Filters Section */}
       <section className="py-8 bg-gray-50 border-b">

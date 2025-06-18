@@ -8,7 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { Smartphone, Eye, EyeOff } from 'lucide-react';
+import { Zap, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
 
 export default function RegisterPage() {
@@ -64,13 +64,22 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="text-center mb-8">
-          <Link href="/" className="inline-flex items-center space-x-2">
-            <Smartphone className="h-8 w-8 text-blue-600" />
-            <span className="text-2xl font-bold text-gray-900">ElectroStore</span>
-          </Link>
-        </div>
+  <div className="w-full max-w-md">
+    <div className="text-center mb-8">
+      <div className="flex justify-center items-center h-full">
+        <Link href="/" className="flex items-center space-x-3 group">
+          <div className="relative">
+            <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+              <Zap className="w-4 h-4 text-white" />
+            </div>
+            <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full"></div>
+          </div>
+          <span className="text-xl font-bold futuristic-heading text-gray-800 group-hover:text-purple-600 transition-colors duration-300">
+            ElectroStore
+          </span>
+        </Link>
+      </div>
+    </div>
 
         <Card>
           <CardHeader>

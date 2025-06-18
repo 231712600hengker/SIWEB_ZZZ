@@ -8,21 +8,21 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand */}
           <div className="space-y-4">
-            <Link href="/" className="flex items-center space-x-3">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
-                  <div className="w-5 h-5 bg-white rounded-sm opacity-90"></div>
-                </div>
-                <div className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-gradient-to-br from-purple-400 to-purple-500 rounded-full"></div>
-              </div>
-              <span className="text-xl font-bold text-white">
-                ElectroStore
-              </span>
-            </Link>
-            <p className="text-gray-400 leading-relaxed">
-              Experience tomorrow technology today. Your trusted destination for cutting-edge electronics 
-              with quantum-powered performance and AI-enhanced features.
-            </p>
+  <Link href="/" className="flex items-center space-x-3 group">
+    <div className="relative">
+      <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center neon-glow">
+        <Zap className="w-4 h-4 text-white" />
+      </div>
+      <div className="absolute -top-0.5 -right-0.5 w-2 h-2 bg-gradient-to-br from-purple-400 to-pink-500 rounded-full"></div>
+    </div>
+    <span className="text-xl font-bold futuristic-heading text-white">
+      ElectroStore
+    </span>
+  </Link>
+  <p className="text-gray-400 leading-relaxed">
+    Experience tomorrow technology today. Your trusted destination for cutting-edge electronics 
+    with quantum-powered performance and AI-enhanced features.
+  </p>
             
             {/* Social Media */}
             <div className="flex space-x-4">

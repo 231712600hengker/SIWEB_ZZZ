@@ -9,7 +9,6 @@ import { FloatingParticles } from '@/components/ui/floating-particles';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { ScrollToTopButton } from '@/components/ui/scroll-to-top';
 import Link from 'next/link';
 import { ArrowRight, Star, Shield, Truck, Headphones, ShoppingCart, Zap, Cpu, Wifi, Battery } from 'lucide-react';
 
@@ -568,19 +567,8 @@ export default function HomePage() {
           }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          <Button 
-            size="lg" 
-            className="rounded-full w-14 h-14 cyber-button"
-            asChild
-          >
-            <Link href="/shop">
-              <ShoppingCart className="h-6 w-6" />
-            </Link>
-          </Button>
-        </motion.div>
+                </motion.div>
       </motion.div>
-
-      <ScrollToTopButton />
       <Footer />
     </div>
   );

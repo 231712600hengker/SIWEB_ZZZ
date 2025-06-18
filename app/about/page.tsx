@@ -1,3 +1,4 @@
+"use client"
 /* eslint-disable react/no-unescaped-entities */
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
@@ -5,6 +6,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Users, Award, Clock, Heart, Target, Zap, Globe, TrendingUp } from 'lucide-react';
+import CountUp from 'react-countup';
 import Link from 'next/link';
 
 export default function AboutPage() {
@@ -159,6 +161,41 @@ const teamMembers = [
           </div>
         </div>
       </section>
+{/* Stats Section */}
+<section className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white">
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="text-center mb-12">
+      <h2 className="text-3xl font-bold mb-4">Our Achievements</h2>
+      <p className="text-purple-100 text-lg">Numbers that speak to our commitment and success</p>
+    </div>
+    <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+      <div className="group">
+        <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
+          <CountUp end={10000} duration={2} separator="," />+
+        </div>
+        <div className="text-blue-200 text-lg">Happy Customers</div>
+      </div>
+      <div className="group">
+        <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
+          <CountUp end={500} duration={2} separator="," />+
+        </div>
+        <div className="text-purple-200 text-lg">Premium Products</div>
+      </div>
+      <div className="group">
+        <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
+          <CountUp end={14} duration={2} />
+        </div>
+        <div className="text-pink-200 text-lg">Years Experience</div>
+      </div>
+      <div className="group">
+        <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">
+          <CountUp end={99} duration={2} />%
+        </div>
+        <div className="text-blue-200 text-lg">Satisfaction Rate</div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Timeline Section */}
       <section className="py-16">
@@ -260,34 +297,6 @@ const teamMembers = [
                 </CardContent>
               </Card>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold mb-4">Our Achievements</h2>
-            <p className="text-purple-100 text-lg">Numbers that speak to our commitment and success</p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
-            <div className="group">
-              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">10,000+</div>
-              <div className="text-blue-200 text-lg">Happy Customers</div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">500+</div>
-              <div className="text-purple-200 text-lg">Premium Products</div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">14</div>
-              <div className="text-pink-200 text-lg">Years Experience</div>
-            </div>
-            <div className="group">
-              <div className="text-5xl font-bold mb-2 group-hover:scale-110 transition-transform duration-300">99%</div>
-              <div className="text-blue-200 text-lg">Satisfaction Rate</div>
-            </div>
           </div>
         </div>
       </section>
