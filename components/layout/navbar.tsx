@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -25,6 +25,7 @@ export function Navbar() {
   const [loading, setLoading] = useState(true);
   const [cartItemCount, setCartItemCount] = useState(0);
   const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(() => {
     fetchUser();
@@ -81,11 +82,18 @@ export function Navbar() {
     { href: '/contact', label: 'Contact', icon: Phone },
   ];
 
+  const isActive = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
+
   return (
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className="border-b bg-background/80 backdrop-blur-md sticky top-0 z-50 glass-morphism"
+      className="border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
@@ -97,7 +105,7 @@ export function Navbar() {
             <Link href="/" className="flex items-center space-x-3 group">
               <div className="relative">
                 <motion.div 
-                  className="w-8 h-8 bg-gradient-to-br from-cyan-400 to-purple-600 rounded-lg flex items-center justify-center neon-glow"
+                  className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center shadow-lg group-hover:shadow-xl transition-all duration-300"
                   whileHover={{ rotate: 360 }}
                   transition={{ duration: 0.5 }}
                 >
@@ -109,7 +117,7 @@ export function Navbar() {
                   transition={{ duration: 2, repeat: Infinity }}
                 />
               </div>
-              <span className="text-xl font-bold futuristic-heading">
+              <span className="text-xl font-bold text-gray-800 group-hover:text-blue-600 transition-colors duration-300">
                 ElectroStore
               </span>
             </Link>
@@ -126,16 +134,19 @@ export function Navbar() {
               >
                 <Link
                   href={item.href}
-                  className="relative text-foreground/80 hover:text-cyan-400 font-medium transition-all duration-300 group px-3 py-2 rounded-lg hover:bg-cyan-400/10"
+                  className={`relative text-gray-700 hover:text-blue-600 font-medium transition-all duration-300 group px-3 py-2 rounded-lg ${
+                    isActive(item.href) 
+                      ? 'text-blue-600 bg-blue-50' 
+                      : 'hover:bg-gray-50'
+                  }`}
                 >
                   <span className="relative z-10">{item.label}</span>
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-lg opacity-0 group-hover:opacity-100"
-                    layoutId="navbar-hover"
-                  />
-                  <motion.div 
-                    className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-cyan-500 to-purple-500 group-hover:w-full transition-all duration-300"
-                  />
+                  {isActive(item.href) && (
+                    <motion.div 
+                      className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-500 to-purple-500"
+                      layoutId="navbar-active"
+                    />
+                  )}
                 </Link>
               </motion.div>
             ))}
@@ -150,13 +161,13 @@ export function Navbar() {
                 whileTap={{ scale: 0.9 }}
               >
                 <Link href="/profile" className="relative">
-                  <Button variant="ghost" size="sm" className="relative hover:bg-cyan-400/10 hover:text-cyan-400">
+                  <Button variant="ghost" size="sm" className="relative hover:bg-blue-50 hover:text-blue-600">
                     <ShoppingCart className="h-5 w-5" />
                     {cartItemCount > 0 && (
                       <motion.div
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
-                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px] bg-gradient-to-r from-cyan-500 to-purple-600 text-white rounded-full neon-glow"
+                        className="absolute -top-2 -right-2 h-5 w-5 flex items-center justify-center text-xs p-0 min-w-[20px] bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-full shadow-lg"
                       >
                         {cartItemCount}
                       </motion.div>
@@ -167,7 +178,7 @@ export function Navbar() {
             )}
 
             {loading ? (
-              <div className="w-8 h-8 bg-muted rounded-full animate-pulse" />
+              <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse" />
             ) : user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -175,31 +186,34 @@ export function Navbar() {
                     whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.9 }}
                   >
-                    <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-cyan-400/10">
-                      <Avatar className="h-8 w-8 neon-border">
-                        <AvatarFallback className="text-xs bg-gradient-to-br from-cyan-400 to-purple-600 text-white">
+                    <Button variant="ghost" size="sm" className="h-8 w-8 rounded-full hover:bg-blue-50">
+                      <Avatar className="h-8 w-8 border-2 border-blue-200">
+                        <AvatarFallback className="text-xs bg-gradient-to-br from-blue-500 to-purple-600 text-white">
                           {user.name.substring(0, 2).toUpperCase()}
                         </AvatarFallback>
                       </Avatar>
                     </Button>
                   </motion.div>
                 </DropdownMenuTrigger>
-                <DropdownMenuContent align="end" className="w-56 glass-morphism border-cyan-500/20">
+                <DropdownMenuContent align="end" className="w-56 border-gray-200 shadow-lg">
                   <div className="flex items-center justify-start gap-2 p-2">
                     <div className="flex flex-col space-y-1 leading-none">
-                      <p className="font-medium text-cyan-400">{user.name}</p>
-                      <p className="w-[200px] truncate text-sm text-muted-foreground">
+                      <p className="font-medium text-blue-600">{user.name}</p>
+                      <p className="w-[200px] truncate text-sm text-gray-500">
                         {user.email}
                       </p>
+                      {user.role === 'ADMIN' && (
+                        <Badge variant="secondary" className="w-fit">Admin</Badge>
+                      )}
                     </div>
                   </div>
                   <DropdownMenuItem asChild>
-                    <Link href={user.role === 'ADMIN' ? '/admin' : '/profile'} className="hover:bg-cyan-400/10">
+                    <Link href={user.role === 'ADMIN' ? '/admin' : '/profile'} className="hover:bg-blue-50">
                       <User className="mr-2 h-4 w-4" />
                       {user.role === 'ADMIN' ? 'Admin Dashboard' : 'Profile'}
                     </Link>
                   </DropdownMenuItem>
-                  <DropdownMenuItem onClick={handleLogout} className="hover:bg-red-400/10 text-red-400">
+                  <DropdownMenuItem onClick={handleLogout} className="hover:bg-red-50 text-red-600">
                     <LogOut className="mr-2 h-4 w-4" />
                     Log out
                   </DropdownMenuItem>
@@ -211,7 +225,7 @@ export function Navbar() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button variant="ghost" asChild className="hover:bg-cyan-400/10 hover:text-cyan-400">
+                  <Button variant="ghost" asChild className="hover:bg-blue-50 hover:text-blue-600">
                     <Link href="/auth/login">Login</Link>
                   </Button>
                 </motion.div>
@@ -219,7 +233,7 @@ export function Navbar() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <Button asChild className="cyber-button">
+                  <Button asChild className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white shadow-lg hover:shadow-xl transition-all duration-300">
                     <Link href="/auth/register">Sign Up</Link>
                   </Button>
                 </motion.div>
@@ -233,12 +247,12 @@ export function Navbar() {
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                 >
-                  <Button variant="ghost" size="sm" className="md:hidden hover:bg-cyan-400/10">
+                  <Button variant="ghost" size="sm" className="md:hidden hover:bg-blue-50">
                     <Menu className="h-5 w-5" />
                   </Button>
                 </motion.div>
               </SheetTrigger>
-              <SheetContent className="glass-morphism border-cyan-500/20">
+              <SheetContent className="border-gray-200">
                 <div className="flex flex-col space-y-4 mt-8">
                   {navItems.map((item, index) => {
                     const Icon = item.icon;
@@ -251,7 +265,11 @@ export function Navbar() {
                       >
                         <Link
                           href={item.href}
-                          className="flex items-center space-x-2 text-foreground/80 hover:text-cyan-400 font-medium transition-colors duration-200 p-2 rounded-lg hover:bg-cyan-400/10"
+                          className={`flex items-center space-x-2 font-medium transition-colors duration-200 p-2 rounded-lg ${
+                            isActive(item.href)
+                              ? 'text-blue-600 bg-blue-50'
+                              : 'text-gray-700 hover:text-blue-600 hover:bg-gray-50'
+                          }`}
                         >
                           <Icon className="h-5 w-5" />
                           <span>{item.label}</span>
@@ -261,11 +279,11 @@ export function Navbar() {
                   })}
                   
                   {!user && (
-                    <div className="flex flex-col space-y-2 pt-4 border-t border-cyan-500/20">
-                      <Button variant="ghost" asChild className="justify-start hover:bg-cyan-400/10">
+                    <div className="flex flex-col space-y-2 pt-4 border-t border-gray-200">
+                      <Button variant="ghost" asChild className="justify-start hover:bg-blue-50">
                         <Link href="/auth/login">Login</Link>
                       </Button>
-                      <Button asChild className="cyber-button">
+                      <Button asChild className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white">
                         <Link href="/auth/register">Sign Up</Link>
                       </Button>
                     </div>
