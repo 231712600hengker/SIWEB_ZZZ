@@ -71,7 +71,7 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-background relative overflow-hidden">
+    <div className="min-h-screen bg-background relative">
       <FloatingParticles />
       <Navbar />
 
