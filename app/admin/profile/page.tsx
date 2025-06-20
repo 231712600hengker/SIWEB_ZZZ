@@ -139,19 +139,19 @@ export default function AdminProfilePage() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="text-sm font-medium text-gray-500">Full Name</label>
-                    <p className="text-white-900 font-medium">{user.name}</p>
+                    <p className="text-gray-900 font-medium">{user.name}</p>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-500">Email Address</label>
-                    <p className="text-white-900 font-medium">{user.email}</p>
+                    <p className="text-gray-900 font-medium">{user.email}</p>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-500">Role</label>
-                    <p className="text-white-900 font-medium">{user.role}</p>
+                    <p className="text-gray-900 font-medium">{user.role}</p>
                   </div>
                   <div>
                     <label className="text-sm font-medium text-gray-500">Member Since</label>
-                    <p className="text-white-900 font-medium">
+                    <p className="text-gray-900 font-medium">
                       {new Date(user.createdAt).toLocaleDateString('en-US', {
                         year: 'numeric',
                         month: 'long',
@@ -173,19 +173,19 @@ export default function AdminProfilePage() {
               </CardHeader>
               <CardContent>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="flex items-center space-x-3 p-3 bg-blue-10 rounded-lg">
+                  <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm font-medium">Manage Products</span>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-blue-10 rounded-lg">
+                  <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm font-medium">Manage Transactions</span>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-blue-10 rounded-lg">
+                  <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm font-medium">View Analytics</span>
                   </div>
-                  <div className="flex items-center space-x-3 p-3 bg-blue-10 rounded-lg">
+                  <div className="flex items-center space-x-3 p-3 bg-blue-50 rounded-lg">
                     <div className="w-2 h-2 bg-green-500 rounded-full"></div>
                     <span className="text-sm font-medium">Manage Users</span>
                   </div>
@@ -200,19 +200,19 @@ export default function AdminProfilePage() {
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
-                  <div className="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <div>
                       <p className="font-medium">Password</p>
-                      <p className="text-sm text-gray-300">Last updated: Never</p>
+                      <p className="text-sm text-gray-500">Last updated: Never</p>
                     </div>
                     <Button variant="outline" size="sm">
                       Change Password
                     </Button>
                   </div>
-                  <div className="flex justify-between items-center p-3 bg-gray-700 rounded-lg">
+                  <div className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
                     <div>
                       <p className="font-medium">Two-Factor Authentication</p>
-                      <p className="text-sm text-gray-300">Not enabled</p>
+                      <p className="text-sm text-gray-500">Not enabled</p>
                     </div>
                     <Button variant="outline" size="sm">
                       Enable 2FA
