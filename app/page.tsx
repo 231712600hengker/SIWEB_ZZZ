@@ -548,27 +548,6 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Floating Action Button */}
-      <motion.div 
-        className="fixed bottom-8 right-8 z-50"
-        initial={{ scale: 0 }}
-        animate={{ scale: 1 }}
-        transition={{ delay: 1 }}
-      >
-        <motion.div
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-          animate={{ 
-            boxShadow: [
-              "0 0 20px rgba(0, 212, 255, 0.5)",
-              "0 0 40px rgba(0, 212, 255, 0.8)",
-              "0 0 20px rgba(0, 212, 255, 0.5)"
-            ]
-          }}
-          transition={{ duration: 2, repeat: Infinity }}
-        >
-                </motion.div>
-      </motion.div>
       <Footer />
     </div>
   );
