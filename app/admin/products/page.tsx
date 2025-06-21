@@ -16,7 +16,7 @@ import { Textarea } from '@/components/ui/textarea';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Switch } from '@/components/ui/switch';
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from '@/components/ui/alert-dialog';
-import { Search, Plus, Edit, Trash2, ChevronLeft, ChevronRight, Package, Zap } from 'lucide-react';
+import { Search, Plus, Edit, Trash2, ChevronLeft, ChevronRight, Package } from 'lucide-react';
 import { toast } from 'sonner';
 
 interface Product {
@@ -221,16 +221,14 @@ export default function AdminProductsPage() {
       >
         {/* Header */}
         <motion.div 
-          className="flex justify-between items-center"
+          className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
           variants={itemVariants}
         >
           <div>
-            <h1 className="text-4xl font-bold futuristic-heading mb-2">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                PRODUCTS
-              </span>
+            <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              Products
             </h1>
-            <p className="text-gray-400 text-lg">Manage your product inventory</p>
+            <p className="text-gray-600 text-lg">Manage your product inventory</p>
           </div>
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -238,7 +236,7 @@ export default function AdminProductsPage() {
           >
             <Button 
               onClick={handleAddProduct}
-              className="cyber-button bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600"
+              className="bg-gradient-to-r from-green-500 to-emerald-500 hover:from-green-600 hover:to-emerald-600 text-white"
             >
               <Plus className="mr-2 h-4 w-4" />
               Add Product
@@ -248,7 +246,7 @@ export default function AdminProductsPage() {
 
         {/* Search */}
         <motion.div variants={itemVariants}>
-          <Card className="glass-morphism border-cyan-500/20">
+          <Card className="border-gray-200">
             <CardContent className="p-6">
               <form onSubmit={handleSearch} className="flex gap-4">
                 <div className="flex-1">
@@ -259,13 +257,13 @@ export default function AdminProductsPage() {
                       placeholder="Search products by name..."
                       value={searchTerm}
                       onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10 bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                      className="pl-10 border-gray-300 focus:border-blue-500"
                     />
                   </div>
                 </div>
                 <Button 
                   type="submit"
-                  className="bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600"
+                  className="bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700"
                 >
                   Search
                 </Button>
@@ -276,24 +274,24 @@ export default function AdminProductsPage() {
 
         {/* Products Table */}
         <motion.div variants={itemVariants}>
-          <Card className="glass-morphism border-cyan-500/20">
-            <CardHeader className="bg-gradient-to-r from-purple-600/20 to-pink-600/20 border-b border-cyan-500/20">
-              <CardTitle className="flex items-center text-white">
-                <div className="p-2 rounded-lg bg-gradient-to-r from-purple-500 to-pink-500 mr-3">
+          <Card className="border-gray-200">
+            <CardHeader className="bg-gradient-to-r from-blue-50 to-purple-50 border-b border-gray-100">
+              <CardTitle className="flex items-center text-gray-900">
+                <div className="p-2 rounded-lg bg-gradient-to-r from-blue-500 to-purple-500 mr-3">
                   <Package className="h-5 w-5 text-white" />
                 </div>
                 All Products
               </CardTitle>
             </CardHeader>
-            <CardContent className="p-6">
+            <CardContent className="p-0">
               {loading ? (
-                <div className="space-y-4">
+                <div className="p-6 space-y-4">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <div key={i} className="flex items-center space-x-4">
-                      <Skeleton className="h-16 w-16 rounded bg-gray-700" />
+                      <Skeleton className="h-16 w-16 rounded bg-gray-200" />
                       <div className="space-y-2 flex-1">
-                        <Skeleton className="h-4 w-full bg-gray-700" />
-                        <Skeleton className="h-3 w-2/3 bg-gray-700" />
+                        <Skeleton className="h-4 w-full bg-gray-200" />
+                        <Skeleton className="h-3 w-2/3 bg-gray-200" />
                       </div>
                     </div>
                   ))}
@@ -303,21 +301,21 @@ export default function AdminProductsPage() {
                   <div className="overflow-x-auto">
                     <Table>
                       <TableHeader>
-                        <TableRow className="border-cyan-500/20 hover:bg-gray-800/50">
-                          <TableHead className="text-gray-300">Image</TableHead>
-                          <TableHead className="text-gray-300">Name</TableHead>
-                          <TableHead className="text-gray-300">Category</TableHead>
-                          <TableHead className="text-gray-300">Price</TableHead>
-                          <TableHead className="text-gray-300">Stock</TableHead>
-                          <TableHead className="text-gray-300">Featured</TableHead>
-                          <TableHead className="text-gray-300">Actions</TableHead>
+                        <TableRow className="border-gray-200 hover:bg-gray-50">
+                          <TableHead className="text-gray-700">Image</TableHead>
+                          <TableHead className="text-gray-700">Name</TableHead>
+                          <TableHead className="text-gray-700 hidden sm:table-cell">Category</TableHead>
+                          <TableHead className="text-gray-700">Price</TableHead>
+                          <TableHead className="text-gray-700 hidden md:table-cell">Stock</TableHead>
+                          <TableHead className="text-gray-700 hidden lg:table-cell">Featured</TableHead>
+                          <TableHead className="text-gray-700">Actions</TableHead>
                         </TableRow>
                       </TableHeader>
                       <TableBody>
                         {products.map((product, index) => (
                           <motion.tr
                             key={product.id}
-                            className="border-cyan-500/10 hover:bg-gray-800/30 transition-colors"
+                            className="border-gray-100 hover:bg-gray-50 transition-colors"
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ delay: index * 0.05 }}
@@ -326,63 +324,63 @@ export default function AdminProductsPage() {
                               <img
                                 src={product.image}
                                 alt={product.name}
-                                className="w-16 h-16 object-cover rounded-lg border border-cyan-500/20"
+                                className="w-12 h-12 sm:w-16 sm:h-16 object-cover rounded-lg border border-gray-200"
                               />
                             </TableCell>
                             <TableCell>
                               <div>
-                                <div className="font-medium text-white">{product.name}</div>
-                                <div className="text-sm text-gray-400 truncate max-w-xs">
-                                  {product.description}
+                                <div className="font-medium text-gray-900 text-sm sm:text-base">{product.name}</div>
+                                <div className="text-xs sm:text-sm text-gray-500 truncate max-w-xs sm:hidden">
+                                  {product.category}
                                 </div>
                               </div>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden sm:table-cell">
                               <Badge 
                                 variant="secondary" 
-                                className="bg-gradient-to-r from-blue-500/20 to-purple-500/20 text-cyan-400 border-cyan-500/30"
+                                className="bg-blue-100 text-blue-800 border-blue-200"
                               >
                                 {product.category}
                               </Badge>
                             </TableCell>
-                            <TableCell className="text-green-400 font-bold">
+                            <TableCell className="text-green-600 font-bold text-sm sm:text-base">
                               ${product.price.toFixed(2)}
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden md:table-cell">
                               <Badge 
                                 variant={product.stock > 0 ? "default" : "destructive"}
                                 className={product.stock > 0 
-                                  ? "bg-green-500/20 text-green-400 border-green-500/30" 
-                                  : "bg-red-500/20 text-red-400 border-red-500/30"
+                                  ? "bg-green-100 text-green-800 border-green-200" 
+                                  : "bg-red-100 text-red-800 border-red-200"
                                 }
                               >
                                 {product.stock}
                               </Badge>
                             </TableCell>
-                            <TableCell>
+                            <TableCell className="hidden lg:table-cell">
                               {product.featured ? (
-                                <Badge className="bg-gradient-to-r from-yellow-500/20 to-orange-500/20 text-yellow-400 border-yellow-500/30">
+                                <Badge className="bg-yellow-100 text-yellow-800 border-yellow-200">
                                   Featured
                                 </Badge>
                               ) : (
                                 <Badge 
                                   variant="outline" 
-                                  className="border-gray-500/30 text-gray-400"
+                                  className="border-gray-300 text-gray-600"
                                 >
                                   Regular
                                 </Badge>
                               )}
                             </TableCell>
                             <TableCell>
-                              <div className="flex space-x-2">
+                              <div className="flex space-x-1 sm:space-x-2">
                                 <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.9 }}>
                                   <Button
                                     variant="outline"
                                     size="sm"
                                     onClick={() => handleEditProduct(product)}
-                                    className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                                    className="border-blue-300 text-blue-600 hover:bg-blue-50 p-1 sm:p-2"
                                   >
-                                    <Edit className="h-4 w-4" />
+                                    <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
                                   </Button>
                                 </motion.div>
                                 <AlertDialog>
@@ -391,21 +389,21 @@ export default function AdminProductsPage() {
                                       <Button 
                                         variant="outline" 
                                         size="sm"
-                                        className="border-red-500/30 text-red-400 hover:bg-red-500/10"
+                                        className="border-red-300 text-red-600 hover:bg-red-50 p-1 sm:p-2"
                                       >
-                                        <Trash2 className="h-4 w-4" />
+                                        <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                                       </Button>
                                     </motion.div>
                                   </AlertDialogTrigger>
-                                  <AlertDialogContent className="bg-gray-900/95 backdrop-blur-md border-cyan-500/20">
+                                  <AlertDialogContent className="bg-white border-gray-200">
                                     <AlertDialogHeader>
-                                      <AlertDialogTitle className="text-white">Delete Product</AlertDialogTitle>
-                                      <AlertDialogDescription className="text-gray-400">
+                                      <AlertDialogTitle className="text-gray-900">Delete Product</AlertDialogTitle>
+                                      <AlertDialogDescription className="text-gray-600">
                                         Are you sure you want to delete "{product.name}"? This action cannot be undone.
                                       </AlertDialogDescription>
                                     </AlertDialogHeader>
                                     <AlertDialogFooter>
-                                      <AlertDialogCancel className="bg-gray-800 text-gray-300 border-gray-600 hover:bg-gray-700">
+                                      <AlertDialogCancel className="bg-gray-100 text-gray-700 border-gray-300 hover:bg-gray-200">
                                         Cancel
                                       </AlertDialogCancel>
                                       <AlertDialogAction
@@ -427,16 +425,16 @@ export default function AdminProductsPage() {
 
                   {/* Pagination */}
                   {totalPages > 1 && (
-                    <div className="flex items-center justify-center space-x-2 mt-6">
+                    <div className="flex items-center justify-center space-x-2 p-6 border-t border-gray-100">
                       <Button
                         variant="outline"
                         size="sm"
                         onClick={() => handlePageChange(currentPage - 1)}
                         disabled={currentPage === 1}
-                        className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                        className="border-gray-300 text-gray-600 hover:bg-gray-50"
                       >
                         <ChevronLeft className="h-4 w-4" />
-                        Previous
+                        <span className="hidden sm:inline ml-1">Previous</span>
                       </Button>
                       
                       {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
@@ -446,8 +444,8 @@ export default function AdminProductsPage() {
                           size="sm"
                           onClick={() => handlePageChange(page)}
                           className={currentPage === page 
-                            ? "bg-gradient-to-r from-cyan-500 to-purple-500 text-white" 
-                            : "border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                            ? "bg-gradient-to-r from-blue-500 to-purple-500 text-white" 
+                            : "border-gray-300 text-gray-600 hover:bg-gray-50"
                           }
                         >
                           {page}
@@ -459,9 +457,9 @@ export default function AdminProductsPage() {
                         size="sm"
                         onClick={() => handlePageChange(currentPage + 1)}
                         disabled={currentPage === totalPages}
-                        className="border-cyan-500/30 text-cyan-400 hover:bg-cyan-500/10"
+                        className="border-gray-300 text-gray-600 hover:bg-gray-50"
                       >
-                        Next
+                        <span className="hidden sm:inline mr-1">Next</span>
                         <ChevronRight className="h-4 w-4" />
                       </Button>
                     </div>
@@ -474,34 +472,34 @@ export default function AdminProductsPage() {
 
         {/* Add/Edit Product Dialog */}
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-          <DialogContent className="max-w-2xl bg-gray-900/95 backdrop-blur-md border-cyan-500/20">
+          <DialogContent className="max-w-2xl bg-white border-gray-200 max-h-[90vh] overflow-y-auto">
             <DialogHeader>
-              <DialogTitle className="text-white flex items-center">
-                <Zap className="mr-2 h-5 w-5 text-cyan-400" />
+              <DialogTitle className="text-gray-900 flex items-center">
+                <Package className="mr-2 h-5 w-5 text-blue-600" />
                 {editingProduct ? 'Edit Product' : 'Add New Product'}
               </DialogTitle>
             </DialogHeader>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="name" className="text-gray-300">Product Name</Label>
+                  <Label htmlFor="name" className="text-gray-700">Product Name</Label>
                   <Input
                     id="name"
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     required
-                    className="bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                    className="border-gray-300 focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="category" className="text-gray-300">Category</Label>
+                  <Label htmlFor="category" className="text-gray-700">Category</Label>
                   <Select value={formData.category} onValueChange={(value) => setFormData({ ...formData, category: value })}>
-                    <SelectTrigger className="bg-gray-800/50 border-cyan-500/30 text-white">
+                    <SelectTrigger className="border-gray-300 focus:border-blue-500">
                       <SelectValue placeholder="Select category" />
                     </SelectTrigger>
-                    <SelectContent className="bg-gray-800 border-cyan-500/30">
+                    <SelectContent className="bg-white border-gray-200">
                       {categories.map((category) => (
-                        <SelectItem key={category} value={category} className="text-white hover:bg-gray-700">
+                        <SelectItem key={category} value={category} className="text-gray-900 hover:bg-gray-100">
                           {category.charAt(0).toUpperCase() + category.slice(1)}
                         </SelectItem>
                       ))}
@@ -511,19 +509,19 @@ export default function AdminProductsPage() {
               </div>
 
               <div>
-                <Label htmlFor="description" className="text-gray-300">Description</Label>
+                <Label htmlFor="description" className="text-gray-700">Description</Label>
                 <Textarea
                   id="description"
                   value={formData.description}
                   onChange={(e) => setFormData({ ...formData, description: e.target.value })}
                   required
-                  className="bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                  className="border-gray-300 focus:border-blue-500"
                 />
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <Label htmlFor="price" className="text-gray-300">Price ($)</Label>
+                  <Label htmlFor="price" className="text-gray-700">Price ($)</Label>
                   <Input
                     id="price"
                     type="number"
@@ -531,31 +529,31 @@ export default function AdminProductsPage() {
                     value={formData.price}
                     onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                     required
-                    className="bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                    className="border-gray-300 focus:border-blue-500"
                   />
                 </div>
                 <div>
-                  <Label htmlFor="stock" className="text-gray-300">Stock</Label>
+                  <Label htmlFor="stock" className="text-gray-700">Stock</Label>
                   <Input
                     id="stock"
                     type="number"
                     value={formData.stock}
                     onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
                     required
-                    className="bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                    className="border-gray-300 focus:border-blue-500"
                   />
                 </div>
               </div>
 
               <div>
-                <Label htmlFor="image" className="text-gray-300">Image URL</Label>
+                <Label htmlFor="image" className="text-gray-700">Image URL</Label>
                 <Input
                   id="image"
                   type="url"
                   value={formData.image}
                   onChange={(e) => setFormData({ ...formData, image: e.target.value })}
                   required
-                  className="bg-gray-800/50 border-cyan-500/30 text-white placeholder-gray-400 focus:border-cyan-400"
+                  className="border-gray-300 focus:border-blue-500"
                 />
               </div>
 
@@ -564,9 +562,9 @@ export default function AdminProductsPage() {
                   id="featured"
                   checked={formData.featured}
                   onCheckedChange={(checked) => setFormData({ ...formData, featured: checked })}
-                  className="data-[state=checked]:bg-gradient-to-r data-[state=checked]:from-cyan-500 data-[state=checked]:to-purple-500"
+                  className="data-[state=checked]:bg-blue-600"
                 />
-                <Label htmlFor="featured" className="text-gray-300">Featured Product</Label>
+                <Label htmlFor="featured" className="text-gray-700">Featured Product</Label>
               </div>
 
               <div className="flex justify-end space-x-2 pt-4">
@@ -574,14 +572,14 @@ export default function AdminProductsPage() {
                   type="button"
                   variant="outline"
                   onClick={() => setIsDialogOpen(false)}
-                  className="border-gray-600 text-gray-300 hover:bg-gray-800"
+                  className="border-gray-300 text-gray-700 hover:bg-gray-100"
                 >
                   Cancel
                 </Button>
                 <Button 
                   type="submit" 
                   disabled={formLoading}
-                  className="bg-gradient-to-r from-cyan-500 to-purple-500 hover:from-cyan-600 hover:to-purple-600 text-white"
+                  className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white"
                 >
                   {formLoading ? 'Saving...' : editingProduct ? 'Update Product' : 'Add Product'}
                 </Button>
